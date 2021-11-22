@@ -1,0 +1,4 @@
+outs:
+- md5: 0efcc1aa9130d4531dc5f3dfa0c323d2
+  size: 183038445
+  path: prepared_train_annotation.pkl
