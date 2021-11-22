@@ -100,7 +100,7 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth):
             plt.show()
             heatmap_already_shown = True
 
-        print(f'Heatmap size = {heatmaps.size}, scale = {scale}')
+        print(f'Heatmap size (N,C,H,W) = {heatmaps.size}, scale = {scale}')
 
         total_keypoints_num = 0
         all_keypoints_by_type = []

@@ -124,4 +124,7 @@ class PoseEstimationWithMobileNet(nn.Module):
         for output in stages_output:
             print(f'output shape = {output.shape}')
         print("--------------------next frame -----------------------")
+        for out in stages_output:
+            out = out.to(memory_format=torch.channels_last)
+
         return stages_output
