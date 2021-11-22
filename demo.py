@@ -3,6 +3,7 @@ import argparse
 import cv2
 import numpy as np
 import torch
+import matplotlib.pyplot as plt
 
 from models.with_mobilenet import PoseEstimationWithMobileNet
 from modules.keypoints import extract_keypoints, group_keypoints
@@ -88,9 +89,16 @@ def run_demo(net, image_provider, height_size, cpu, track, smooth):
     num_keypoints = Pose.num_kpts
     previous_poses = []
     delay = 1
+    heatmap_already_shown = False
     for img in image_provider:
         orig_img = img.copy()
         heatmaps, pafs, scale, pad = infer_fast(net, img, height_size, stride, upsample_ratio, cpu)
+
+        if not heatmap_already_shown:
+            for index in range(19):
+                plt.imshow(heatmaps[:, :, index], cmap='hot', interpolation='nearest')
+            plt.show()
+            heatmap_already_shown = True
 
         print(f'Heatmap size = {heatmaps.size}, scale = {scale}')
 
