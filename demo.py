@@ -174,9 +174,8 @@ if __name__ == '__main__':
     example = torch.rand(1, 3, 800, 800)
     traced_script_module = torch.jit.script(model, example)
     from torch.utils.mobile_optimizer import optimize_for_mobile
-    torchscript_model_optimized = optimize_for_mobile(traced_script_module)
-    #torch.jit._save_for_lite_interpreter(torchscript_model_optimized, "mobile_model.pt")
-    torchscript_model_optimized._save_for_lite_interpreter("mobile_model.ptl")
+    torchscript_model_optimized = optimize_for_mobile(traced_script_module, backend='metal')
+    torchscript_model_optimized._save_for_lite_interpreter("mobile_model_metal.pt")
 
 
     frame_provider = ImageReader(args.images)
